@@ -1,0 +1,10 @@
+version = 1
+SPDX-PackageName = "decisionengine"
+SPDX-PackageSupplier = "HEPCloud team <>"
+SPDX-PackageDownloadLocation = "https://github.com/HEPCloud/decisionengine"
+
+[[annotations]]
+path = [".editorconfig", ".gitignore", "requirements.txt", "uv.lock"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 Fermi Research Alliance, LLC"
+SPDX-License-Identifier = "Apache-2.0"

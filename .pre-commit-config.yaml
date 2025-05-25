@@ -1,0 +1,100 @@
+---
+# SPDX-FileCopyrightText: 2025 Marco Mambelli
+# SPDX-License-Identifier: Apache-2.0
+
+# For more information see
+#  https://pre-commit.com/index.html#install
+#  https://pre-commit.com/index.html#automatically-enabling-pre-commit-on-repositories
+default_language_version:
+  # force all unspecified python hooks to run python3
+  python: python3
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: v5.0.0
+    hooks:
+      - id: check-ast
+      - id: check-docstring-first
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+        args:
+          - "--markdown-linebreak-ext=md"
+  - repo: "https://github.com/pre-commit/pygrep-hooks"
+    rev: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-check-blanket-type-ignore
+      - id: python-use-type-annotations
+  - repo: "https://github.com/pycqa/isort"
+    rev: 6.0.1
+    hooks:
+      - id: isort
+  - repo: "https://github.com/psf/black"
+    rev: 25.1.0
+    hooks:
+      - id: black
+  - repo: "https://github.com/pre-commit/mirrors-prettier"
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        # HTML pre section bug https://github.com/prettier/prettier/issues/17042
+        exclude: "doc/factory/troubleshooting.html"
+        exclude_types:
+          - "python"
+        additional_dependencies:
+          - "prettier"
+          - "prettier-plugin-toml@0.3.1"
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.11.11
+    hooks:
+      # Run the linter.
+      - id: ruff
+        #  No auto-fix
+        # args: [ --fix ]
+      # Don't Run the formatter.
+      # - id: ruff-format
+  - repo: "https://github.com/asottile/pyupgrade"
+    rev: v3.20.0
+    # rev: e695ecd365119ab4e5463f6e49bea5f4b7ca786b
+    # lock to v2.31.0 (must specify the git hash), v2.32.0 requires python >= 3.7
+    hooks:
+      - id: pyupgrade
+        exclude: "^skip/this/file.py$"
+        # needs to be py3.6 compatible
+        args:
+          - "--py36-plus"
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+        args: [
+            # codespell   --toml pyproject.toml -S ./build/ci/checkbashisms.pl -S ./unittests/cs.fixture  .
+            # Pass skip configuration as command line arguments rather than in the
+            # config file because neither cfg nor TOML support splitting this argument
+            # across multiple lines.
+            # Globs must match the Python `glob` module's format:
+            # https://docs.python.org/3/library/glob.html#module-glob
+            "-S",
+            ".codespell/ignore_words.txt",
+            # Write changes in place
+            "-w",
+          ]
+        additional_dependencies:
+          - tomli
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v5.0.2
+    hooks:
+      - id: reuse
+        additional_dependencies:
+          - python-debian==0.1.40
+  - repo: "https://github.com/aio-libs/sort-all"
+    # sort-all requires python 3.8+
+    rev: v1.3.0
+    hooks:
+      - id: sort-all
+        language_version: "3.9"
