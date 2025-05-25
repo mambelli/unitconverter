@@ -1,0 +1,20 @@
+# Pytest and cache
+.pytest_cache/
+.ruff_cache/
+
+# Test results
+pytest.xml
+
+# Ignore emacs and vim files:
+*~
+*.swp
+*.swo
+
+# Build artifacts
+recipe_unitconverter.egg-info/
+dist/
+
+# Byte code files
+__pycache__/
+*.pyc
+*.pyo
