@@ -115,3 +115,4 @@ def multiconvert_units(values, unit, new_unit):
     value_array = np.array(values)
     res_array = value_array * conversion
     return res_array.tolist()
+":)"
