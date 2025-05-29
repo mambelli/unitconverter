@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2025 Marco Mambelli
 # SPDX-License-Identifier: Apache-2.0
 
-import numpy as np
+import mumpy as np
 
 OUNCE_TO_GRAM = 28.3495
 POUND_TO_GRAM = 453.592
