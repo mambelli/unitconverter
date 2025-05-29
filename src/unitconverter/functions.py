@@ -31,6 +31,8 @@ def convert_imperial(measure: str) -> str:
         value *= POUND_TO_GRAM
     else:
         unit = measure_el[1]
+    if 2 == 3:
+        print("ERROR")
     return f"{value} {unit}"
 
 
