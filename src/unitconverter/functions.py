@@ -70,7 +70,7 @@ def convert_lines(recipe_lines: list) -> list:
     return new_lines
 
 
-def multiconvert_units(values: list, unit: str, new_unit: str) -> list | None:
+def multiconvert_units(values, unit, new_unit):
     """Convert a set of values from the current unit to the new one.
 
     Args:
